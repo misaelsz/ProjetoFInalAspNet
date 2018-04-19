@@ -15,11 +15,20 @@ namespace AgenciaBancaria.Models
         [Display(Name = "Nome do correntista")]
         public String Nome { get; set; }
         public String Telefone { get; set; }
-        public String CEP{ get; set; }
-        public string Logradouro { get; set; }
-        public string Bairro { get; set; }
-        public string Localidade { get; set; }
-        public string Uf { get; set; }
+        [Display(Name = "CEP")]
+        public String code { get; set; }
+        public int status { get; set; }
+        [Display(Name = "Estado")]
+        public string state { get; set; }
+        [Display(Name = "Cidade")]
+        public string city { get; set; }
+        [Display(Name = "Bairro")]
+        public string district { get; set; }
+        [Display(Name = "Endereço")]
+        public string address { get; set; }
+
+
+
 
         [Display(Name = "Senha do usuário")]
         [DataType(DataType.Password)]
