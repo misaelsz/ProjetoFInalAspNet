@@ -27,19 +27,6 @@ namespace AgenciaBancaria.Models
         [Display(Name = "Endereço")]
         public string address { get; set; }
 
-
-
-
-        [Display(Name = "Senha do usuário")]
-        [DataType(DataType.Password)]
-        public string Senha { get; set; }
-
-        [Display(Name = "Confirmação de senha")]
-        [DataType(DataType.Password)]
-        [Compare("Senha", ErrorMessage = "Os campos não coincidem!")]
-        [NotMapped]
-        public string ConfirmacaoSenha { get; set; }
-
         public Conta conta{ get; set; }
     }
 }

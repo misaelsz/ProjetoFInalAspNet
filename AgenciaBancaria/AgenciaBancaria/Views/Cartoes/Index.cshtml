@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AgenciaBancaria.Models.Cartao>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroDoCartao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoDeSeguranca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Limite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Debito)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QUantidadeDeParcelas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorDaParcela)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroDoCartao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoDeSeguranca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Limite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Debito)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QUantidadeDeParcelas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorDaParcela)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

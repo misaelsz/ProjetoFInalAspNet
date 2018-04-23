@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Principal";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Principal</h2>
+
+@Html.ActionLink("Gerenciar clientes", "Index", "Cliente", null, new { @class = "btn btn-primary", @style= "margin-left:10px " })
+
+@Html.ActionLink("Gerenciar contas", "Index", "Contas", null, new { @class = "btn btn-primary", @style = "margin-left:10px " })
+
+@Html.ActionLink("Gerenciar cartoes", "Index", "Cartoes", null, new { @class = "btn btn-primary", @style = "margin-left:10px " })

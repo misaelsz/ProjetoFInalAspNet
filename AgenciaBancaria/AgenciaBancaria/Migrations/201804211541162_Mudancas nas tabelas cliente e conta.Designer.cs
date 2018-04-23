@@ -7,13 +7,13 @@ namespace AgenciaBancaria.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Ateracaonatabeladecliente : IMigrationMetadata
+    public sealed partial class Mudancasnastabelasclienteeconta : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Ateracaonatabeladecliente));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Mudancasnastabelasclienteeconta));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804191342474_Ateracao na tabela de cliente"; }
+            get { return "201804211541162_Mudancas nas tabelas cliente e conta"; }
         }
         
         string IMigrationMetadata.Source

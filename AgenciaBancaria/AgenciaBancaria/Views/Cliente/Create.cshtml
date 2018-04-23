@@ -32,18 +32,34 @@
         </div>
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+			@Html.LabelFor(model => model.conta.Agencia, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+				@Html.EditorFor(model => model.conta.Agencia, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.conta.Agencia, "", new { @class = "text-danger" })
 			</div>
 		</div>
 
 		<div class="form-group">
-			@Html.LabelFor(model => model.ConfirmacaoSenha, htmlAttributes: new { @class = "control-label col-md-2" })
+			@Html.LabelFor(model => model.conta.numeroDaConta, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.EditorFor(model => model.ConfirmacaoSenha, new { htmlAttributes = new { @class = "form-control" } })
-				@Html.ValidationMessageFor(model => model.ConfirmacaoSenha, "", new { @class = "text-danger" })
+				@Html.EditorFor(model => model.conta.numeroDaConta, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.conta.numeroDaConta, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.conta.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.conta.Senha, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.conta.Senha, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.conta.ConfirmacaoSenha, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.conta.ConfirmacaoSenha, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.conta.ConfirmacaoSenha, "", new { @class = "text-danger" })
 			</div>
 		</div>
 

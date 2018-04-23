@@ -1,0 +1,75 @@
+﻿@model AgenciaBancaria.Models.Conta
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Conta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Agencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numeroDaConta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numeroDaConta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Senha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Senha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDeCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDeCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDeCancelamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDeCancelamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

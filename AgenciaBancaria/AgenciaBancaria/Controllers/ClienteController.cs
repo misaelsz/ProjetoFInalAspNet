@@ -41,7 +41,8 @@ namespace AgenciaBancaria.Controllers
         // GET: Cliente/Create
         public ActionResult Create()
         {
-            return View();
+            Cliente cliente = (Cliente)HttpContext.Session["Usuario"];
+            return View(cliente);
         }
 
         // POST: Cliente/Create
@@ -49,10 +50,13 @@ namespace AgenciaBancaria.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Telefone,code,state,city,address,Senha")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id,Nome,Telefone,code,state,city,district,address")] Cliente cliente)
         {
-
+            
+            
+            
             cliente = (Cliente)HttpContext.Session["Usuario"];
+            cliente.conta = (Conta)HttpContext.Session["Conta"];
             if (ModelState.IsValid)
             {
                 db.Clientes.Add(cliente);
@@ -70,7 +74,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Clientes.Find(id);
+            Cliente cliente = db.Clientes.Include("Conta").FirstOrDefault(x => x.Id == id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -83,7 +87,7 @@ namespace AgenciaBancaria.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Telefone,code,state,city,address,Senha")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Telefone,code,state,city,district,address,Conta")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -139,8 +143,6 @@ namespace AgenciaBancaria.Controllers
                 
                 cliente.Nome = clienteAux.Nome;
                 cliente.Telefone = clienteAux.Telefone;
-                cliente.Senha = clienteAux.Senha;
-                cliente.ConfirmacaoSenha = clienteAux.ConfirmacaoSenha;
 
                 //Passar o objeto preenchido para outra Action
                 HttpContext.Session["Usuario"] = cliente;

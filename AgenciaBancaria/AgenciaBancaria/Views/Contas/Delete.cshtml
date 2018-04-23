@@ -1,4 +1,4 @@
-﻿@model AgenciaBancaria.Models.Cliente
+﻿@model AgenciaBancaria.Models.Conta
 
 @{
     ViewBag.Title = "Delete";
@@ -9,65 +9,64 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Cliente</h4>
+    <h4>Conta</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Agencia)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Nome)
+            @Html.DisplayFor(model => model.Agencia)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Telefone)
+            @Html.DisplayNameFor(model => model.numeroDaConta)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Telefone)
+            @Html.DisplayFor(model => model.numeroDaConta)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.code)
+            @Html.DisplayNameFor(model => model.Senha)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.code)
+            @Html.DisplayFor(model => model.Senha)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.state)
+            @Html.DisplayNameFor(model => model.DataDeCadastro)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.state)
+            @Html.DisplayFor(model => model.DataDeCadastro)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.city)
+            @Html.DisplayNameFor(model => model.Saldo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.city)
+            @Html.DisplayFor(model => model.Saldo)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.district)
+            @Html.DisplayNameFor(model => model.DataDeCancelamento)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.district)
+            @Html.DisplayFor(model => model.DataDeCancelamento)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.address)
+            @Html.DisplayNameFor(model => model.Status)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.address)
+            @Html.DisplayFor(model => model.Status)
         </dd>
-
 
     </dl>
 

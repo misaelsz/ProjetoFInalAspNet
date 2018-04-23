@@ -1,0 +1,73 @@
+﻿@model AgenciaBancaria.Models.Cartao
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Cartao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDoCartao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDoCartao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoDeSeguranca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoDeSeguranca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Limite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Limite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Debito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Debito)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUantidadeDeParcelas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUantidadeDeParcelas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorDaParcela)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorDaParcela)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
