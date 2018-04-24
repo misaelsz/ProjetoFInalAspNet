@@ -31,6 +31,5 @@ namespace AgenciaBancaria.Models
         public Double Saldo { get; set; }
         public String DataDeCancelamento { get; set; }
         public String Status { get; set; }//Status da conta é a situação da conta exemplo Status = cancelada ou Status = Ativa
-        public List<Cartao> listaDeCartoes{ get; set; }
     }
 }

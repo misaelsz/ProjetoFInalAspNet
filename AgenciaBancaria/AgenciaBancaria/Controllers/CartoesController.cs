@@ -37,8 +37,9 @@ namespace AgenciaBancaria.Controllers
         }
 
         // GET: Cartoes/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            HttpContext.Session["Id"] = id;
             return View();
         }
 
@@ -49,10 +50,17 @@ namespace AgenciaBancaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,NumeroDoCartao,CodigoDeSeguranca,Limite,Debito,QUantidadeDeParcelas,ValorDaParcela")] Cartao cartao)
         {
+
+            int id = (int)HttpContext.Session["id"];
+
             if (ModelState.IsValid)
             {
+               Conta conta = db.Contas.Find(id);
+                cartao.conta = conta;
                 db.Cartoes.Add(cartao);
                 db.SaveChanges();
+                
+               
                 return RedirectToAction("Index");
             }
 
