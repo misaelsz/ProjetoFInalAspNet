@@ -58,6 +58,7 @@ namespace AgenciaBancaria.Controllers
             Conta conta = (Conta)HttpContext.Session["Conta"];
             conta = ContaDAO.BuscaPorId(conta.Id);
             conta.Saldo = conta.Saldo + depositar;
+            conta.ConfirmacaoSenha = conta.Senha;
             ContaDAO.Editar(conta);
             return RedirectToAction("Usuario", "Home");
         }

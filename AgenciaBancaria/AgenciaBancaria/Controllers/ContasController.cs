@@ -117,6 +117,7 @@ namespace AgenciaBancaria.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Conta conta = db.Contas.Find(id);
+            conta.ConfirmacaoSenha = conta.Senha;
             db.Contas.Remove(conta);
             db.SaveChanges();
             return RedirectToAction("Index");

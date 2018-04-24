@@ -28,8 +28,13 @@ namespace AgenciaBancaria.DAL
         }
         public static void Editar(Conta conta)
         {
-            ctx.Entry(conta).State = EntityState.Modified;
-            ctx.SaveChanges();
+            using (var context = Singleton.Instance.Context)
+            {
+                context.Entry(conta).State = EntityState.Modified;
+                context.SaveChanges();
+
+            }
+            
         }
 
         public static void Deletar(Conta conta)
