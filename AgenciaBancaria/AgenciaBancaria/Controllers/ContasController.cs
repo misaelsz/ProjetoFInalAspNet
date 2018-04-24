@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AgenciaBancaria.DAL;
 using AgenciaBancaria.Models;
+using System.Web.Security;
 
 namespace AgenciaBancaria.Controllers
 {
@@ -121,6 +122,8 @@ namespace AgenciaBancaria.Controllers
             return RedirectToAction("Index");
         }
 
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -130,4 +133,6 @@ namespace AgenciaBancaria.Controllers
             base.Dispose(disposing);
         }
     }
+
+
 }

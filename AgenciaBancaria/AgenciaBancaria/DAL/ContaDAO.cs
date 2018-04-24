@@ -39,5 +39,18 @@ namespace AgenciaBancaria.DAL
 
         }
 
+        public static Conta BuscarContaPorNumeroESenha(Conta conta) {
+            return ctx.Contas.FirstOrDefault(x =>
+                x.numeroDaConta.Equals(conta.numeroDaConta) &&
+                x.Senha.Equals(conta.Senha));
+        }
+
+        public static Conta BuscarContaPorNumeroEAgencia(string num, string ag)
+        {
+            return ctx.Contas.FirstOrDefault(x =>
+                x.numeroDaConta.Equals(num) &&
+                x.Agencia.Equals(ag));
+        }
+
     }
 }
