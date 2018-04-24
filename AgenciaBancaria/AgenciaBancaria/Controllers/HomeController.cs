@@ -52,15 +52,17 @@ namespace AgenciaBancaria.Controllers
             return RedirectToAction("Login", "Contas");
         }
         [HttpPost]
-        public ActionResult Depositar(Double valor)
+        [ValidateAntiForgeryToken]
+        public ActionResult Depositar(double depositar)
         {
             Conta conta = (Conta)HttpContext.Session["Conta"];
             conta = ContaDAO.BuscaPorId(conta.Id);
-            conta.Saldo = conta.Saldo + valor;
+            conta.Saldo = conta.Saldo + depositar;
             ContaDAO.Editar(conta);
             return RedirectToAction("Usuario", "Home");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Sacar(Double valor)
         {
             Conta conta = (Conta)HttpContext.Session["Conta"];
@@ -73,13 +75,14 @@ namespace AgenciaBancaria.Controllers
             return RedirectToAction("Usuario", "Home");
         }
         [HttpPost]
-        public ActionResult Trasferir(Double valor, string ContaDestino, string AgenciaDestino)
+        [ValidateAntiForgeryToken]
+        public ActionResult Trasferir(Double Transferir, string ContaDestino, string AgenciaDestino)
         {
           Conta MinhaConta = (Conta)HttpContext.Session["Conta"];
             Conta conta = ContaDAO.BuscarContaPorNumeroEAgencia(ContaDestino, AgenciaDestino);
-            if (MinhaConta.Saldo > valor)
+            if (MinhaConta.Saldo > Transferir)
             {
-                conta.Saldo = conta.Saldo - valor;
+                conta.Saldo = conta.Saldo - Transferir;
                 ContaDAO.Editar(conta);
             }
             return View();
