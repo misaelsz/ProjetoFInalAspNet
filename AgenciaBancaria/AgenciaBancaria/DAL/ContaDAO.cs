@@ -10,29 +10,29 @@ namespace AgenciaBancaria.DAL
 {
     public class ContaDAO
     {
-        Contexto ctx = Singleton.Instance.Context;
+       private static Contexto ctx = Singleton.Instance.Context;
 
-        public void Cadastrar(Conta conta)
+        public static void Cadastrar(Conta conta)
         {
             ctx.Contas.Add(conta);
             ctx.SaveChanges();
         }
 
-        public List<Conta> listarTodos()
+        public static List<Conta> listarTodos()
         {
             return ctx.Contas.ToList();
         }
-        public Conta BuscaPorId(int? id)
+        public static Conta BuscaPorId(int? id)
         {
             return ctx.Contas.Find(id);
         }
-        public void Editar(Conta conta)
+        public static void Editar(Conta conta)
         {
             ctx.Entry(conta).State = EntityState.Modified;
             ctx.SaveChanges();
         }
 
-        public void Deletar(Conta conta)
+        public static void Deletar(Conta conta)
         {
             ctx.Contas.Remove(conta);
             ctx.SaveChanges();

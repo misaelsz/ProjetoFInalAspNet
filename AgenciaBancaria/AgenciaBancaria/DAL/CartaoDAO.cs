@@ -11,25 +11,25 @@ namespace AgenciaBancaria.DAL
     public class CartaoDAO
     {
 
-        Contexto ctx = Singleton.Instance.Context;
+       private static Contexto  ctx = Singleton.Instance.Context;
 
-        public void Cadastrar(Cartao cartao) {
+        public static void Cadastrar(Cartao cartao) {
             ctx.Cartoes.Add(cartao);
             ctx.SaveChanges();
         }
 
-        public List<Cartao> listarTodos() {
+        public static List<Cartao> listarTodos() {
             return ctx.Cartoes.ToList();
         }
-        public Cartao BuscaPorId(int? id) {
+        public static Cartao BuscaPorId(int? id) {
             return ctx.Cartoes.Find(id);
         }
-        public void Editar(Cartao cartao) {
+        public static void Editar(Cartao cartao) {
             ctx.Entry(cartao).State = EntityState.Modified;
             ctx.SaveChanges();
         }
 
-        public void Deletar(Cartao cartao) {
+        public static void Deletar(Cartao cartao) {
             ctx.Cartoes.Remove(cartao);
             ctx.SaveChanges();
 
