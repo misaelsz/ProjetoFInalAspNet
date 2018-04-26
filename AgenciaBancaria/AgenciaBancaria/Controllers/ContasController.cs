@@ -19,7 +19,7 @@ namespace AgenciaBancaria.Controllers
         // GET: Contas
         public ActionResult Index()
         {
-            return View(db.Contas.ToList());
+            return View(ContaDAO.listarTodos());
         }
 
         // GET: Contas/Details/5
@@ -29,7 +29,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conta conta = db.Contas.Find(id);
+            Conta conta = ContaDAO.BuscaPorId(id);
             if (conta == null)
             {
                 return HttpNotFound();
@@ -56,8 +56,6 @@ namespace AgenciaBancaria.Controllers
                 conta.DataDeCadastro = DateTime.Now;
                 conta.Status = "Ativo";
                 conta.Saldo = 0;
-                db.Contas.Add(conta);
-                db.SaveChanges();
                 HttpContext.Session["Conta"] = conta;
                 return RedirectToAction("Create", "Cliente");
             }
@@ -72,7 +70,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conta conta = db.Contas.Find(id);
+            Conta conta = ContaDAO.BuscaPorId(id);
             if (conta == null)
             {
                 return HttpNotFound();
@@ -85,12 +83,11 @@ namespace AgenciaBancaria.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Agencia,numeroDaConta,Senha,DataDeCadastro,Saldo,DataDeCancelamento,Status")] Conta conta)
+        public ActionResult Edit([Bind(Include = "Id,Agencia,numeroDaConta,Senha,ConfirmacaoSenha,DataDeCadastro,Saldo,DataDeCancelamento,Status")] Conta conta)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(conta).State = EntityState.Modified;
-                db.SaveChanges();
+                ContaDAO.Editar(conta);
                 return RedirectToAction("Index");
             }
             return View(conta);
@@ -103,7 +100,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conta conta = db.Contas.Find(id);
+            Conta conta = ContaDAO.BuscaPorId(id);
             if (conta == null)
             {
                 return HttpNotFound();
@@ -116,23 +113,23 @@ namespace AgenciaBancaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Conta conta = db.Contas.Find(id);
-            conta.ConfirmacaoSenha = conta.Senha;
-            db.Contas.Remove(conta);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
-
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            try
             {
-                db.Dispose();
+                Conta conta = db.Contas.Find(id);
+                conta.ConfirmacaoSenha = conta.Senha;
+                ContaDAO.Deletar(conta);
+                return RedirectToAction("Index");
             }
-            base.Dispose(disposing);
+            catch (Exception)
+            {
+
+                TempData["Mensagem"] = "Não é possivel Excluir uma conta com um cliente e cartão vinculados!";
+                return View();
+            }
+            
         }
+
     }
 
 

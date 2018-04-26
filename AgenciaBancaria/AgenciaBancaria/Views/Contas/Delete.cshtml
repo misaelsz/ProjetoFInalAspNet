@@ -72,7 +72,10 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
+		if (TempData["Mensagem"] != null)
+		{
+			<span class="text-danger">@TempData["Mensagem"]</span>
+		}
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")

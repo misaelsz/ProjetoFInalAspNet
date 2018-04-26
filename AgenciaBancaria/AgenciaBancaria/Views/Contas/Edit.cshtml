@@ -46,12 +46,18 @@
 		<div class="form-group">
 			@Html.LabelFor(model => model.ConfirmacaoSenha, htmlAttributes: new { @class = "control-label col-md-2" })
 			<div class="col-md-10">
-				@Html.EditorFor(model => model.ConfirmacaoSenha, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.TextBox("ConfirmacaoSenha", Model.Senha, new { htmlAttributes = new { @class = "form-control" } })
 				@Html.ValidationMessageFor(model => model.ConfirmacaoSenha, "", new { @class = "text-danger" })
 			</div>
 		</div>
 
-
+		<div class="form-group">
+			@Html.LabelFor(model => model.DataDeCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.TextBox("DataDeCadastro", Model.DataDeCadastro, new { htmlAttributes = new { @class = "form-control", @disable = "" } })
+				@Html.ValidationMessageFor(model => model.DataDeCadastro, "", new { @class = "text-danger" })
+			</div>
+		</div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })

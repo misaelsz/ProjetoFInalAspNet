@@ -13,7 +13,7 @@ namespace AgenciaBancaria.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804241135344_Inicial"; }
+            get { return "201804252106187_Inicial"; }
         }
         
         string IMigrationMetadata.Source
