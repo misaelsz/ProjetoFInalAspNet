@@ -20,7 +20,7 @@ namespace AgenciaBancaria.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            return View(db.Clientes.ToList());
+            return View(ClienteDAO.listarTodos());
         }
 
         // GET: Cliente/Details/5
@@ -30,7 +30,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Clientes.Find(id);
+            Cliente cliente = ClienteDAO.BuscaPorId(id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -52,15 +52,14 @@ namespace AgenciaBancaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Nome,Telefone,code,state,city,district,address")] Cliente cliente)
         {
-            
-            
-            
+
+
+
             cliente = (Cliente)HttpContext.Session["Usuario"];
             cliente.conta = (Conta)HttpContext.Session["Conta"];
             if (ModelState.IsValid)
             {
-                db.Clientes.Add(cliente);
-                db.SaveChanges();
+                ClienteDAO.Cadastrar(cliente);
                 return RedirectToAction("Index");
             }
 
@@ -74,7 +73,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Clientes.Include("Conta").FirstOrDefault(x => x.Id == id);
+            Cliente cliente = ClienteDAO.BuscaPorId(id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -91,8 +90,24 @@ namespace AgenciaBancaria.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cliente).State = EntityState.Modified;
-                db.SaveChanges();
+                Cliente clienteAux = cliente;
+                cliente = ClienteDAO.BuscaPorId(cliente.Id);
+
+                #region preenchendo objeto 
+
+                cliente.Nome = clienteAux.Nome;
+                cliente.state = clienteAux.state;
+                cliente.status = clienteAux.status;
+                cliente.Telefone = clienteAux.Telefone;
+                cliente.address = clienteAux.address;
+                cliente.city = clienteAux.city;
+                cliente.code = clienteAux.code;
+                cliente.conta = clienteAux.conta;
+                cliente.district = clienteAux.district;
+
+                #endregion
+
+                ClienteDAO.Editar(cliente);
                 return RedirectToAction("Index");
             }
             return View(cliente);
@@ -105,7 +120,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.Clientes.Find(id);
+            Cliente cliente = ClienteDAO.BuscaPorId(id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -118,9 +133,7 @@ namespace AgenciaBancaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cliente cliente = db.Clientes.Find(id);
-            db.Clientes.Remove(cliente);
-            db.SaveChanges();
+            ClienteDAO.Deletar(ClienteDAO.BuscaPorId(id));
             return RedirectToAction("Index");
         }
 
@@ -140,7 +153,7 @@ namespace AgenciaBancaria.Controllers
                 //Converter os dados da string em objeto
                 cliente = JsonConvert.DeserializeObject<Cliente>(resultado);
 
-                
+
                 cliente.Nome = clienteAux.Nome;
                 cliente.Telefone = clienteAux.Telefone;
 
@@ -152,15 +165,6 @@ namespace AgenciaBancaria.Controllers
                 TempData["Mensagem"] = "CEP inválido!";
             }
             return RedirectToAction("Create", "Cliente");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

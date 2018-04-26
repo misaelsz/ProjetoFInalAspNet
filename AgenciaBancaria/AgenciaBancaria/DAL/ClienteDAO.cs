@@ -25,7 +25,7 @@ namespace AgenciaBancaria.DAL
         }
         public static Cliente BuscaPorId(int? id)
         {
-            return ctx.Clientes.Find(id);
+            return ctx.Clientes.Include("Conta").FirstOrDefault(x => x.Id == id);
         }
         public static void Editar(Cliente cliente)
         {

@@ -18,7 +18,7 @@ namespace AgenciaBancaria.Controllers
         // GET: Cartoes
         public ActionResult Index()
         {
-            return View(db.Cartoes.ToList());
+            return View(CartaoDAO.listarTodos());
         }
 
         // GET: Cartoes/Details/5
@@ -28,7 +28,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cartao cartao = db.Cartoes.Find(id);
+            Cartao cartao = CartaoDAO.BuscaPorId(id);
             if (cartao == null)
             {
                 return HttpNotFound();
@@ -55,11 +55,9 @@ namespace AgenciaBancaria.Controllers
 
             if (ModelState.IsValid)
             {
-               Conta conta = db.Contas.Find(id);
+                Conta conta = ContaDAO.BuscaPorId(id);
                 cartao.conta = conta;
-                db.Cartoes.Add(cartao);
-                db.SaveChanges();
-                
+                CartaoDAO.Cadastrar(cartao);
                
                 return RedirectToAction("Index");
             }
@@ -74,7 +72,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cartao cartao = db.Cartoes.Find(id);
+            Cartao cartao = CartaoDAO.BuscaPorId(id);
             if (cartao == null)
             {
                 return HttpNotFound();
@@ -91,8 +89,7 @@ namespace AgenciaBancaria.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cartao).State = EntityState.Modified;
-                db.SaveChanges();
+                CartaoDAO.Editar(cartao);
                 return RedirectToAction("Index");
             }
             return View(cartao);
@@ -105,7 +102,7 @@ namespace AgenciaBancaria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cartao cartao = db.Cartoes.Find(id);
+            Cartao cartao = CartaoDAO.BuscaPorId(id);
             if (cartao == null)
             {
                 return HttpNotFound();
@@ -118,19 +115,10 @@ namespace AgenciaBancaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cartao cartao = db.Cartoes.Find(id);
-            db.Cartoes.Remove(cartao);
-            db.SaveChanges();
+            CartaoDAO.Deletar(CartaoDAO.BuscaPorId(id));
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

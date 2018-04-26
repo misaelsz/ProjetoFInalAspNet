@@ -86,7 +86,16 @@ namespace AgenciaBancaria.Controllers
         public ActionResult Edit([Bind(Include = "Id,Agencia,numeroDaConta,Senha,ConfirmacaoSenha,DataDeCadastro,Saldo,DataDeCancelamento,Status")] Conta conta)
         {
             if (ModelState.IsValid)
-            {
+            { Conta ContaAux = conta;
+               conta = ContaDAO.BuscaPorId(conta.Id);
+                conta.numeroDaConta = ContaAux.numeroDaConta;
+                conta.Senha = ContaAux.Senha;
+                conta.Status = ContaAux.Status;
+                conta.Agencia = ContaAux.Agencia;
+                conta.DataDeCadastro = ContaAux.DataDeCadastro;
+                conta.ConfirmacaoSenha = ContaAux.ConfirmacaoSenha;
+                conta.DataDeCancelamento = ContaAux.DataDeCancelamento;
+                conta.Saldo = ContaAux.Saldo;
                 ContaDAO.Editar(conta);
                 return RedirectToAction("Index");
             }
@@ -116,7 +125,7 @@ namespace AgenciaBancaria.Controllers
 
             try
             {
-                Conta conta = db.Contas.Find(id);
+                Conta conta = ContaDAO.BuscaPorId(id);
                 conta.ConfirmacaoSenha = conta.Senha;
                 ContaDAO.Deletar(conta);
                 return RedirectToAction("Index");
